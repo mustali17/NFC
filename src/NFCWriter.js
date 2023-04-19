@@ -1,33 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-function NfcWriter() {
-  const [url, setUrl] = useState('');
+function NFCWriter() {
+  const [output, setOutput] = useState("");
+  const [status, setStatus] = useState(
+    "Web NFC is not available. Please make sure the 'Experimental Web Platform features' flag is enabled on Android."
+  );
 
-  const handleUrlChange = (event) => {
-    setUrl(event.target.value);
+  const handleScanClick = async () => {
+    setOutput("User clicked scan button");
+
+    try {
+      const ndef = new window.NDEFReader();
+      await ndef.scan();
+      setOutput("> Scan started");
+
+      ndef.addEventListener("readingerror", () => {
+        setOutput("Argh! Cannot read data from the NFC tag. Try another one?");
+      });
+
+      ndef.addEventListener("reading", ({ message, serialNumber }) => {
+        setOutput(`> Serial Number: ${serialNumber}`);
+        setOutput(`> Records: (${message.records.length})`);
+      });
+    } catch (error) {
+      setOutput(`Argh! ${error}`);
+    }
   };
 
-  const handleWriteUrl = async () => {
+  const handleWriteClick = async () => {
+    setOutput("User clicked write button");
+
     try {
-      const nfc = navigator.nfc;
-      await nfc?.requestPermission();
-      const ndef = new window.NDEFWriter();
-      const record = window.NDEFRecord.createUri(url);
-      const message = [record];
-      await ndef.write(message);
-      alert('URL written to NFC tag successfully!');
+      const ndef = new window.NDEFReader();
+      await ndef.write("Hello world!");
+      setOutput("> Message written");
     } catch (error) {
-      console.error(error);
-      alert('Error writing URL to NFC tag');
+      setOutput(`Argh! ${error}`);
     }
   };
 
   return (
     <div>
-      <input type="text" value={url} onChange={handleUrlChange} />
-      <button onClick={handleWriteUrl}>Write URL to NFC tag</button>
+      <h3>Live Output</h3>
+      <div id="output" className="output">
+        <div id="content"></div>
+        <div id="status">{status}</div>
+        <pre id="log">{output}</pre>
+      </div>
+      <button id="scanButton" onClick={handleScanClick}>
+        Scan
+      </button>
+      <button id="writeButton" onClick={handleWriteClick}>
+        Write
+      </button>
     </div>
   );
 }
 
-export default NfcWriter;
+export default NFCWriter;
