@@ -8,7 +8,7 @@ function NFCWriter() {
 
   const handleScanClick = async () => {
     setOutput("User clicked scan button");
-
+    console.log('Scan Button Clicked');
     try {
       const ndef = new window.NDEFReader();
       await ndef.scan();
@@ -29,7 +29,7 @@ function NFCWriter() {
 
   const handleWriteClick = async () => {
     setOutput("User clicked write button");
-
+    console.log('write Button Clicked');
     try {
       const ndef = new window.NDEFReader();
       await ndef.write("Hello world!");
