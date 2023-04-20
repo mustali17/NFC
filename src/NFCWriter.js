@@ -44,10 +44,11 @@ function NFCWriter() {
       setOutput(`Argh! ${error}`);
     }
   };
+//   console.log(process.env.LINK);
 
   const writeGoogle = async () => {
     const {data } = await axios.get(
-        `http://localhost:2160/link/google`,
+        ( "http://localhost:2160/link/google" || "https://nfc-backend1.onrender.com/link/google"),
     );
     console.log(data[0].link);
     const ndef = new window.NDEFReader();
@@ -64,7 +65,7 @@ function NFCWriter() {
 
   const writeLinkedIn = async () => {
     const {data } = await axios.get(
-        `http://localhost:2160/link/linkedin`,
+        (`http://localhost:2160/link/linkedin` || "https://nfc-backend1.onrender.com/link/linkedin"),
     );
     console.log(data[0].link);
     const ndef = new window.NDEFReader();
@@ -81,7 +82,7 @@ function NFCWriter() {
 
   const writeWApp = async() => {
     const {data } = await axios.get(
-        `http://localhost:2160/link/whatsapp`,
+        (`http://localhost:2160/link/whatsapp` || "https://nfc-backend1.onrender.com/link/whatsapp"),
     );
     console.log(data[0].link);
     const ndef = new window.NDEFReader();
