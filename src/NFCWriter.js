@@ -106,19 +106,31 @@ function NFCWriter() {
   };
 
   const writeURL = async () => {
-    console.log(url);
-    try {
-      const ndef = new window.NDEFReader();
-      const message = [
-        {
-          records: [{ recordType: "url", data: url }],
-        },
-      ];
-      await ndef.write(message);
-      setOutput(`URL Written ${url}`);
-    } catch (error) {
-      setOutput(`Write failed! ${error}`);
-    }
+    //   console.log(url);
+    //   try {
+    //     const ndef = new window.NDEFReader();
+    //     const message = [
+    //       {
+    //         records: [{ recordType: "url", data: url }],
+    //       },
+    //     ];
+    //     await ndef.write(message);
+    //     setOutput(`URL Written ${url}`);
+    //   } catch (error) {
+    //     setOutput(`Write failed! ${error}`);
+    //   }
+    const ndef = new window.NDEFReader();
+    const urlTest = "https://www.linkedin.com/in/sayajishirke/";
+    ndef
+      .write({
+        records: [{ recordType: "url", data: urlTest }],
+      })
+      .then(() => {
+        console.log("Message written.");
+      })
+      .catch((error) => {
+        console.log(`Write failed :-( try again: ${error}.`);
+      });
   };
 
   return (

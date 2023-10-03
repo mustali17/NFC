@@ -1,0 +1,115 @@
+.user_card {
+  display: flex;
+  flex-direction: row;
+  width: 29rem;
+  margin-top: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0.375rem 0.375rem 1.5rem 0.0625rem rgba(171, 181, 217, 0.18);
+}
+
+.card_tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  margin-top: 0.5rem;
+  padding: 7px 1rem 7px 1rem;
+  border-radius: 4rem;
+  font-weight: 500;
+}
+
+.buy_card {
+  width: 29rem;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  box-shadow: 0.375rem 0.375rem 1.5rem 0.0625rem rgba(171, 181, 217, 0.18);
+}
+
+.active_user_card {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  width: 29rem;
+  margin-bottom: 1rem;
+  border: 0.0625rem solid #1a1a1a;
+  border-radius: 0.75rem;
+  box-shadow: 0.375rem 0.375rem 1.5rem 0.0625rem rgba(171, 181, 217, 0.18);
+}
+
+.active_tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  height: 2rem;
+  background: #1a1a1a;
+  padding-inline: 12px;
+  border-radius: 2.5rem;
+}
+
+.info_card {
+  display: flex;
+  width: 29rem;
+  background: #f3f3f3;
+  padding: 1.25rem;
+  border: 0.0625rem solid #dfdbd8;
+  border-radius: 0.75rem;
+}
+
+.copy_button {
+  display: flex;
+  color: #ffffff;
+  justify-content: space-between;
+  align-items: center;
+  height: 3.25rem;
+  background: #1a1a1a;
+  padding: 0rem 1rem 0rem 1rem;
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 825px) {
+  .active_user_card,
+  .user_card,
+  .info_card {
+    width: 100%;
+  }
+}
+
+.device-iphone {
+  animation: tap 4s infinite;
+}
+
+@keyframes tap {
+  0% {
+    right: 0;
+  }
+
+  40% {
+    right: calc(50% - 3.75rem);
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.95);
+  }
+  55% {
+    transform: scale(1);
+  }
+  60% {
+    right: calc(50% - 3.75rem);
+  }
+
+  100% {
+    right: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .left-device-container {
+    min-height: calc(100vh - 212px);
+  }
+  .active_user_card,
+  .user_card {
+    margin-top: 16px;
+  }
+}
